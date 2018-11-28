@@ -1,0 +1,21 @@
+<!--
+  @名   称 : 403.html
+  @作   者 : admin
+  @创建时间 : 2018/2/5 10:36
+  @描   述 :
+-->
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8"/>
+    <title>没有权限</title>
+</head>
+<body>
+
+<h2 th:text="'错误: 没有权限  '+${ex.message}"> 错误</h2>
+<hr />
+
+</body>
+</html>

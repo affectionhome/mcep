@@ -1,0 +1,74 @@
+<!--
+  @名   称 : selectUser
+  @作   者 : admin
+  @创建时间 : 2018/3/14 20:12
+  @描   述 : 
+ -->
+
+<div>
+
+    <div id="main">
+        <div id="chooseToolbar">
+            <a class="btn btn-success" href="javascript:;" onclick="choose()"><i class="zmdi "></i> 确认选择</a>
+            <a class="btn btn-default" href="javascript:;" onclick="chooseUserDialog.close();"><i class="zmdi "></i> 取消</a>
+
+        </div>
+        <table id="chooseUserTable"></table>
+    </div>
+
+
+</div>
+<script>
+
+    var $chooseUserTable = $('#chooseUserTable');
+    $(function() {
+        // bootstrap table初始化
+        $chooseUserTable.bootstrapTable({
+            url: '/common/user/select',
+            height: getHeight()-200,
+            striped: true,
+            search: true,
+            showRefresh: true,
+            showColumns: true,
+            minimumCountColumns: 2,
+            clickToSelect: true,
+            singleSelect    : true,
+            //detailView: true,
+            //detailFormatter: 'detailFormatter',
+            pagination: true,
+            paginationLoop: false,
+            sidePagination: 'server',
+            silentSort: false,
+            smartDisplay: false,
+            escape: true,
+            searchOnEnterKey: true,
+            idField: 'userId',
+            maintainSelected: true,
+            toolbar: '#chooseToolbar',
+            sortName : 'user_id',
+            sortOrder : 'asc',
+            columns: [
+                {field: 'ck', checkbox: true},
+                {field: 'username', title: '帐号'},
+                {field: 'realname', title: '姓名'},
+                {field: 'oname', title: '主部门'},
+                {field: 'name', title: '主岗位'},
+                {field: 'locked', title: '状态', sortable: true, align: 'center', formatter: 'lockedFormatter'}
+                //,{field: 'action', title: '操作', align: 'center', formatter: 'actionFormatter', events: 'actionEvents', clickToSelect: false}
+            ]
+        });
+    });
+    // 格式化状态
+    function lockedFormatter(value, row, index) {
+        if (value == 1) {
+            return '<span class="label label-default">锁定</span>';
+        } else {
+            return '<span class="label label-success">正常</span>';
+        }
+    }
+
+    function choose(){
+        Mcep.dialog.record = $chooseUserTable.bootstrapTable('getSelections');
+        chooseUserDialog.close();
+    }
+</script>

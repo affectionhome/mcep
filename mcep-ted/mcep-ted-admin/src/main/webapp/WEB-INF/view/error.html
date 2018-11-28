@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8"/>
+    <title th:text="${error} + ' - McepPoms'">标题 - McepPoms</title>
+</head>
+<body>
+
+<h2 th:text="'错误:'+${ex.message}"> 错误</h2>
+<hr />
+
+</pre>
+</body>
+</html>

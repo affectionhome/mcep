@@ -1,0 +1,74 @@
+body, html {height: 100%; position: relative; font-family: 'Microsoft yahei'; font-size: 13px; font-weight: 400;}
+img {vertical-align: middle;}
+a, a:hover, a:active, a:focus {text-decoration: none; -webkit-user-drag: none; outline: none; color: #000;}
+a i{font-size: 13px;}
+
+#content{padding: 8px 10px;}
+
+/* 数据表格 */
+body{font-size: 12px;}
+.table i{font-size: 12px; color: #000;}
+.bootstrap-table .table>thead>tr>th{border-bottom: none;}
+.bootstrap-table .table:not(.table-condensed), .bootstrap-table .table:not(.table-condensed)>tbody>tr>td, .bootstrap-table .table:not(.table-condensed)>tbody>tr>th, .bootstrap-table .table:not(.table-condensed)>tfoot>tr>td, .bootstrap-table .table:not(.table-condensed)>tfoot>tr>th, .bootstrap-table .table:not(.table-condensed)>thead>tr>td{padding: 12px 8px;}
+/* 分页 */
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus{background: #f5f5f5; color: #000; border-color: #7d7d7d;}
+.pagination>li>a, .pagination>li>span{color: #000;}.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus{background-color: #999;}
+/* bootstrap */
+.jconfirm .jconfirm-box .jconfirm-buttons button{-webkit-border-radius: 0; border-radius: 0;}
+.btn:active{-webkit-box-shadow: none; box-shadow: none;}
+/* input */
+body .jconfirm{z-index: 999;}
+.jconfirm-content form{margin-top: 10px;}
+.crudDialog{padding: 0 0 2px;}
+.dialog-buttons a{font-weight: bold;}
+.form-group{margin-bottom: 0px;}
+.form-group label{position: absolute; padding-left:20px;line-height: 2; font-size: 16px; font-weight: normal; transition: all .2s; pointer-events: none; color: #999;}
+.form-group .active{transform: translateY(-65%); font-size: 12px; color: #337ab7;}
+/*.form-group .form-control{font-size: 14px; box-shadow: none; padding-left: 0; padding-right: 0; border-radius: 0; border: none; border-bottom: 2px solid #eee; outline: none; transition: all .5s;}*/
+/*.form-group .form-control:focus{box-shadow: none; border-color: #337ab7;}*/
+
+
+/*表单页面*/
+.title {
+    margin-bottom: 10px;
+}
+.title label{
+    padding-left:20px;line-height: 2; font-size: 20px; font-weight: normal; transition: all .2s; pointer-events: none;
+}
+
+.banner {
+    width: 100%;height: 30px;text-align:left;padding-left: 20px;padding-top:4px;border-radius: 3px;font-size: 16px;color:#ffffff;background-color: #00bfff;
+}
+
+table#main {
+    width:100%;
+    border:0;
+
+}
+table#main>tbody>tr>td:nth-child(odd){
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: right;
+}
+
+#main label{ padding-left:20px;padding-right:25px;line-height: 2; font-size: 16px; font-weight: normal; transition: all .2s;  color: #999;}
+
+#main input{ }
+
+.toolbar {
+    position:fixed; left:0px; bottom:0px; width:100%; height:60px; margin-bottom:0px;padding-top:10px;padding-left:50px;background-color:#fff; z-index:9999;
+}
+#main textarea {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.important {
+    color:red;
+    margin-right: 10px;
+
+}
+a:hover{text-decoration:underline;color: #C20C0C;}
+
+.thumbnail {
+    margin-bottom: 0px;
+}

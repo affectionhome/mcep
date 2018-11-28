@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="mcep-upms-rpc-service"/>
+
+    <dubbo:registry address="zookeeper://zkserver:2181"/>
+
+    <dubbo:protocol name="dubbo" port="20881"/>
+    <dubbo:protocol name="hessian" port="20887"/>
+
+
+    <!--<dubbo:monitor protocol="registry"/>-->
+
+    <!-- 系统 -->
+    <bean id="upmsSystemService" class="net.mcep.upms.rpc.service.impl.UpmsSystemServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsSystemService" ref="upmsSystemService" timeout="10000"/>
+
+    <!-- 组织 -->
+    <bean id="upmsOrganizationService" class="net.mcep.upms.rpc.service.impl.UpmsOrganizationServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsOrganizationService" ref="upmsOrganizationService" timeout="10000"/>
+
+    <!-- 用户组织 -->
+    <bean id="upmsUserOrganizationService" class="net.mcep.upms.rpc.service.impl.UpmsUserOrganizationServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsUserOrganizationService" ref="upmsUserOrganizationService" timeout="10000"/>
+
+    <!-- 用户 -->
+    <bean id="upmsUserService" class="net.mcep.upms.rpc.service.impl.UpmsUserServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsUserService" ref="upmsUserService" timeout="10000"/>
+
+    <!-- 角色 -->
+    <bean id="upmsRoleService" class="net.mcep.upms.rpc.service.impl.UpmsRoleServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsRoleService" ref="upmsRoleService" timeout="10000"/>
+
+    <!-- 权限 -->
+    <bean id="upmsPermissionService" class="net.mcep.upms.rpc.service.impl.UpmsPermissionServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsPermissionService" ref="upmsPermissionService" timeout="10000"/>
+
+    <!-- 角色权限 -->
+    <bean id="upmsRolePermissionService" class="net.mcep.upms.rpc.service.impl.UpmsRolePermissionServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsRolePermissionService" ref="upmsRolePermissionService" timeout="10000"/>
+
+    <!-- 用户权限 -->
+    <bean id="upmsUserPermissionService" class="net.mcep.upms.rpc.service.impl.UpmsUserPermissionServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsUserPermissionService" ref="upmsUserPermissionService" timeout="10000"/>
+
+    <!-- 用户角色 -->
+    <bean id="upmsUserRoleService" class="net.mcep.upms.rpc.service.impl.UpmsUserRoleServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsUserRoleService" ref="upmsUserRoleService" timeout="10000"/>
+
+    <!-- 操作日志 -->
+    <bean id="upmsLogService" class="net.mcep.upms.rpc.service.impl.UpmsLogServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsLogService" ref="upmsLogService" timeout="10000"/>
+
+    <!-- 接口服务 -->
+    <bean id="upmsApiService" class="net.mcep.upms.rpc.service.impl.UpmsApiServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsApiService" ref="upmsApiService" timeout="10000"/>
+
+
+    <bean id="upmsCompanyService" class="net.mcep.upms.rpc.service.impl.UpmsCompanyServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsCompanyService" ref="upmsCompanyService" timeout="10000"/>
+
+    <!--文件上传服务-->
+    <bean id="upmsFileInfoService" class="net.mcep.upms.rpc.service.impl.UpmsFileInfoServiceImpl"/>
+    <dubbo:service protocol="hessian" interface="net.mcep.upms.rpc.api.UpmsFileInfoService" ref="upmsFileInfoService" timeout="10000"/>
+
+    <!-- 岗位 -->
+    <bean id="upmsJobsService" class="net.mcep.upms.rpc.service.impl.UpmsJobsServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsJobsService" ref="upmsJobsService" timeout="10000"/>
+
+    <!-- 资源定义 -->
+    <bean id="upmsResourceService" class="net.mcep.upms.rpc.service.impl.UpmsResourceServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsResourceService" ref="upmsResourceService" timeout="10000"/>
+
+    <!-- 角色组织 -->
+    <bean id="upmsRoleOrganizationService" class="net.mcep.upms.rpc.service.impl.UpmsRoleOrganizationServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsRoleOrganizationService" ref="upmsRoleOrganizationService" timeout="10000"/>
+
+    <!-- 数据权限管理 -->
+    <bean id="upmsDataPermissionService" class="net.mcep.upms.rpc.service.impl.UpmsDataPermissionServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsDataPermissionService" ref="upmsDataPermissionService" timeout="10000"/>
+
+    <!-- 用户和岗位 -->
+    <bean id="upmsUserJobsService" class="net.mcep.upms.rpc.service.impl.UpmsUserJobsServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsUserJobsService" ref="upmsUserJobsService" timeout="10000"/>
+
+    <!-- 资源用户 -->
+    <bean id="upmsResourceUserService" class="net.mcep.upms.rpc.service.impl.UpmsResourceUserServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsResourceUserService" ref="upmsResourceUserService" timeout="10000"/>
+
+    <!-- 资源岗位 -->
+    <bean id="upmsResourceJobsService" class="net.mcep.upms.rpc.service.impl.UpmsResourceJobsServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsResourceJobsService" ref="upmsResourceJobsService" timeout="10000"/>
+
+    <!-- 岗位组织 -->
+    <bean id="upmsJobsOrganizationService" class="net.mcep.upms.rpc.service.impl.UpmsJobsOrganizationServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsJobsOrganizationService" ref="upmsJobsOrganizationService" timeout="10000"/>
+
+    <!-- 资源角色 -->
+    <bean id="upmsResourceRoleService" class="net.mcep.upms.rpc.service.impl.UpmsResourceRoleServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsResourceRoleService" ref="upmsResourceRoleService" timeout="10000"/>
+
+    <!-- 角色资源 -->
+    <bean id="upmsCodeService" class="net.mcep.upms.rpc.service.impl.UpmsCodeServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsCodeService" ref="upmsCodeService" timeout="10000"/>
+
+    <!-- 公共编码 -->
+    <bean id="upmsCodeClassService" class="net.mcep.upms.rpc.service.impl.UpmsCodeClassServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsCodeClassService" ref="upmsCodeClassService" timeout="10000"/>
+
+    <!-- 岗位权限 -->
+    <bean id="upmsJobsPermissionService" class="net.mcep.upms.rpc.service.impl.UpmsJobsPermissionServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsJobsPermissionService" ref="upmsJobsPermissionService" timeout="10000"/>
+
+
+    <!-- redis -->
+    <bean id="upmsRedisService" class="net.mcep.upms.rpc.service.impl.UpmsRedisServiceImpl"/>
+    <dubbo:service interface="net.mcep.upms.rpc.api.UpmsRedisService" ref="upmsRedisService" timeout="100000"/>
+
+
+</beans>

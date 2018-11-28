@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
+
+    <dubbo:application name="mcep-upms-server"/>
+
+    <dubbo:registry file="./mcep-upms-server-dubbo.cache" address="zookeeper://zkserver:2181"/>
+
+    <!-- 订阅服务 -->
+    <dubbo:consumer check="false"/>
+
+    <!-- 系统 -->
+    <dubbo:reference id="upmsSystemService" interface="net.mcep.upms.rpc.api.UpmsSystemService" mock="true"/>
+    <!-- 组织 -->
+    <dubbo:reference id="upmsOrganizationService" interface="net.mcep.upms.rpc.api.UpmsOrganizationService" mock="true"/>
+    <!-- 用户组织 -->
+    <dubbo:reference id="upmsUserOrganizationService" interface="net.mcep.upms.rpc.api.UpmsUserOrganizationService" mock="true"/>
+    <!-- 用户 -->
+    <dubbo:reference id="upmsUserService" interface="net.mcep.upms.rpc.api.UpmsUserService" mock="true"/>
+    <!-- 角色 -->
+    <dubbo:reference id="upmsRoleService" interface="net.mcep.upms.rpc.api.UpmsRoleService" mock="true"/>
+    <!-- 权限 -->
+    <dubbo:reference id="upmsPermissionService" interface="net.mcep.upms.rpc.api.UpmsPermissionService" mock="true"/>
+    <!-- 角色权限 -->
+    <dubbo:reference id="upmsRolePermissionService" interface="net.mcep.upms.rpc.api.UpmsRolePermissionService" mock="true"/>
+    <!-- 用户权限 -->
+    <dubbo:reference id="upmsUserPermissionService" interface="net.mcep.upms.rpc.api.UpmsUserPermissionService" mock="true"/>
+    <!-- 用户角色 -->
+    <dubbo:reference id="upmsUserRoleService" interface="net.mcep.upms.rpc.api.UpmsUserRoleService" mock="true"/>
+    <!-- 操作日志 -->
+    <dubbo:reference id="upmsLogService" interface="net.mcep.upms.rpc.api.UpmsLogService" mock="true"/>
+    <!-- 接口服务 -->
+    <dubbo:reference id="upmsApiService" interface="net.mcep.upms.rpc.api.UpmsApiService" mock="true"/>
+
+    <!--文件上传服务-->
+    <dubbo:reference id="upmsFileInfoService" interface="net.mcep.upms.rpc.api.UpmsFileInfoService" mock="true"/>
+
+    <dubbo:reference id="upmsCompanyService" interface="net.mcep.upms.rpc.api.UpmsCompanyService" mock="true"/>
+
+    <!-- 岗位 -->
+    <dubbo:reference id="upmsJobsService" interface="net.mcep.upms.rpc.api.UpmsJobsService" mock="true"/>
+    <!-- 资源定义 -->
+    <dubbo:reference id="upmsResourceService" interface="net.mcep.upms.rpc.api.UpmsResourceService" mock="true"/>
+    <!-- 角色组织 -->
+    <dubbo:reference id="upmsRoleOrganizationService" interface="net.mcep.upms.rpc.api.UpmsRoleOrganizationService" mock="true"/>
+    <!-- 数据权限管理 -->
+    <dubbo:reference id="upmsDataPermissionService" interface="net.mcep.upms.rpc.api.UpmsDataPermissionService" mock="true"/>
+
+    <!-- 用户岗位 -->
+    <dubbo:reference id="upmsUserJobsService" interface="net.mcep.upms.rpc.api.UpmsUserJobsService" mock="true"/>
+
+    <!-- 资源用户 -->
+    <dubbo:reference id="upmsResourceUserService" interface="net.mcep.upms.rpc.api.UpmsResourceUserService" mock="true"/>
+
+    <!-- 资源岗位 -->
+    <dubbo:reference id="upmsResourceJobsService" interface="net.mcep.upms.rpc.api.UpmsResourceJobsService" mock="true"/>
+
+    <!-- 岗位组织 -->
+    <dubbo:reference id="upmsJobsOrganizationService" interface="net.mcep.upms.rpc.api.UpmsJobsOrganizationService" mock="true"/>
+
+    <!-- 资源角色 -->
+    <dubbo:reference id="upmsResourceRoleService" interface="net.mcep.upms.rpc.api.UpmsResourceRoleService" mock="true"/>
+
+    <!-- 角色资源 -->
+    <dubbo:reference id="upmsCodeService" interface="net.mcep.upms.rpc.api.UpmsCodeService" mock="true"/>
+
+    <!-- 公共编码 -->
+    <dubbo:reference id="upmsCodeClassService" interface="net.mcep.upms.rpc.api.UpmsCodeClassService" mock="true"/>
+
+    <!-- 岗位权限 -->
+    <dubbo:reference id="upmsJobsPermissionService" interface="net.mcep.upms.rpc.api.UpmsJobsPermissionService" mock="true"/>
+
+    <!-- redis -->
+    <dubbo:reference id="upmsRedisService" interface="net.mcep.upms.rpc.api.UpmsRedisService" mock="true"/>
+
+</beans>

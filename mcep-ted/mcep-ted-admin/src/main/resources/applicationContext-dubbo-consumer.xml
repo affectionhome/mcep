@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
+
+    <dubbo:application name="mcep-ted-admin"/>
+
+    <dubbo:registry file="./mcep-ted-admin-dubbo.cache" address="zookeeper://zkserver:2181"/>
+
+    <!-- 订阅服务 -->
+    <dubbo:consumer check="false"/>
+
+    <!-- 添加本系统需要的服务 （开始） -->
+
+    <!-- demo -->
+    <dubbo:reference id="tedDemoService" interface="net.mcep.ted.rpc.api.TedDemoService" mock="true"/>
+
+
+
+
+
+
+    <!-- 添加本系统需要的服务 （结束） -->
+
+    <!-- 公共编码 -->
+    <dubbo:reference id="upmsCodeService" interface="net.mcep.upms.rpc.api.UpmsCodeService" mock="true"/>
+
+    <!-- 用户 -->
+    <dubbo:reference id="upmsUserService" interface="net.mcep.upms.rpc.api.UpmsUserService" mock="true"/>
+
+    <!--文件上传服务-->
+    <dubbo:reference id="upmsFileInfoService" interface="net.mcep.upms.rpc.api.UpmsFileInfoService" mock="true"/>
+
+    <!-- 接口服务 **新功能模块需求用shiro进行权限控制的必须用加上这个服务**-->
+    <dubbo:reference id="upmsApiService" interface="net.mcep.upms.rpc.api.UpmsApiService" mock="true"/>
+
+
+</beans>

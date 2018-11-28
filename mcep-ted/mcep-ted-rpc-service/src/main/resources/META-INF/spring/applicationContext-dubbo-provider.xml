@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
+
+    <dubbo:application name="mcep-ted-rpc-service"/>
+
+    <dubbo:registry address="zookeeper://zkserver:2181"/>
+
+    <dubbo:protocol name="dubbo" port="20985"/>
+
+    <!--<dubbo:monitor protocol="registry"/>-->
+
+    <!-- DEMO -->
+    <bean id="tedDemoServiceImpl" class="net.mcep.ted.rpc.service.impl.TedDemoServiceImpl"/>
+    <dubbo:service interface="net.mcep.ted.rpc.api.TedDemoService" ref="tedDemoServiceImpl" timeout="100000"/>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- 用户角色 -->
+    <dubbo:reference id="upmsUserRoleService" interface="net.mcep.upms.rpc.api.UpmsUserRoleService" mock="true" check="false"/>
+
+    <dubbo:reference id="upmsApiService" interface="net.mcep.upms.rpc.api.UpmsApiService" mock="true" check="false"/>
+
+</beans>

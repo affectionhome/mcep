@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.mcep.ted.dao.mapper.TedDemoMapper">
+  <resultMap id="BaseResultMap" type="net.mcep.ted.dao.model.TedDemo">
+    <id column="proprietor_id" jdbcType="INTEGER" property="proprietorId" />
+    <result column="proprietor_code" jdbcType="VARCHAR" property="proprietorCode" />
+    <result column="proprietor_name" jdbcType="VARCHAR" property="proprietorName" />
+    <result column="memo" jdbcType="VARCHAR" property="memo" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="contact_id" jdbcType="INTEGER" property="contactId" />
+    <result column="credit_code" jdbcType="VARCHAR" property="creditCode" />
+    <result column="proprietor_nature" jdbcType="INTEGER" property="proprietorNature" />
+    <result column="representative" jdbcType="VARCHAR" property="representative" />
+    <result column="registered_capital" jdbcType="REAL" property="registeredCapital" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    proprietor_id, proprietor_code, proprietor_name, memo, state, contact_id, credit_code, 
+    proprietor_nature, representative, registered_capital
+  </sql>
+  <select id="selectByExample" parameterType="net.mcep.ted.dao.model.TedDemoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ted_demo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ted_demo
+    where proprietor_id = #{proprietorId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ted_demo
+    where proprietor_id = #{proprietorId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="net.mcep.ted.dao.model.TedDemoExample">
+    delete from ted_demo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="net.mcep.ted.dao.model.TedDemo">
+    insert into ted_demo (proprietor_id, proprietor_code, proprietor_name, 
+      memo, state, contact_id, 
+      credit_code, proprietor_nature, representative, 
+      registered_capital)
+    values (#{proprietorId,jdbcType=INTEGER}, #{proprietorCode,jdbcType=VARCHAR}, #{proprietorName,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{contactId,jdbcType=INTEGER}, 
+      #{creditCode,jdbcType=VARCHAR}, #{proprietorNature,jdbcType=INTEGER}, #{representative,jdbcType=VARCHAR}, 
+      #{registeredCapital,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="net.mcep.ted.dao.model.TedDemo">
+    insert into ted_demo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="proprietorId != null">
+        proprietor_id,
+      </if>
+      <if test="proprietorCode != null">
+        proprietor_code,
+      </if>
+      <if test="proprietorName != null">
+        proprietor_name,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="contactId != null">
+        contact_id,
+      </if>
+      <if test="creditCode != null">
+        credit_code,
+      </if>
+      <if test="proprietorNature != null">
+        proprietor_nature,
+      </if>
+      <if test="representative != null">
+        representative,
+      </if>
+      <if test="registeredCapital != null">
+        registered_capital,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="proprietorId != null">
+        #{proprietorId,jdbcType=INTEGER},
+      </if>
+      <if test="proprietorCode != null">
+        #{proprietorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="proprietorName != null">
+        #{proprietorName,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="contactId != null">
+        #{contactId,jdbcType=INTEGER},
+      </if>
+      <if test="creditCode != null">
+        #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="proprietorNature != null">
+        #{proprietorNature,jdbcType=INTEGER},
+      </if>
+      <if test="representative != null">
+        #{representative,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredCapital != null">
+        #{registeredCapital,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="net.mcep.ted.dao.model.TedDemoExample" resultType="java.lang.Long">
+    select count(*) from ted_demo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ted_demo
+    <set>
+      <if test="record.proprietorId != null">
+        proprietor_id = #{record.proprietorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.proprietorCode != null">
+        proprietor_code = #{record.proprietorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proprietorName != null">
+        proprietor_name = #{record.proprietorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memo != null">
+        memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactId != null">
+        contact_id = #{record.contactId,jdbcType=INTEGER},
+      </if>
+      <if test="record.creditCode != null">
+        credit_code = #{record.creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proprietorNature != null">
+        proprietor_nature = #{record.proprietorNature,jdbcType=INTEGER},
+      </if>
+      <if test="record.representative != null">
+        representative = #{record.representative,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registeredCapital != null">
+        registered_capital = #{record.registeredCapital,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ted_demo
+    set proprietor_id = #{record.proprietorId,jdbcType=INTEGER},
+      proprietor_code = #{record.proprietorCode,jdbcType=VARCHAR},
+      proprietor_name = #{record.proprietorName,jdbcType=VARCHAR},
+      memo = #{record.memo,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      contact_id = #{record.contactId,jdbcType=INTEGER},
+      credit_code = #{record.creditCode,jdbcType=VARCHAR},
+      proprietor_nature = #{record.proprietorNature,jdbcType=INTEGER},
+      representative = #{record.representative,jdbcType=VARCHAR},
+      registered_capital = #{record.registeredCapital,jdbcType=REAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="net.mcep.ted.dao.model.TedDemo">
+    update ted_demo
+    <set>
+      <if test="proprietorCode != null">
+        proprietor_code = #{proprietorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="proprietorName != null">
+        proprietor_name = #{proprietorName,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="contactId != null">
+        contact_id = #{contactId,jdbcType=INTEGER},
+      </if>
+      <if test="creditCode != null">
+        credit_code = #{creditCode,jdbcType=VARCHAR},
+      </if>
+      <if test="proprietorNature != null">
+        proprietor_nature = #{proprietorNature,jdbcType=INTEGER},
+      </if>
+      <if test="representative != null">
+        representative = #{representative,jdbcType=VARCHAR},
+      </if>
+      <if test="registeredCapital != null">
+        registered_capital = #{registeredCapital,jdbcType=REAL},
+      </if>
+    </set>
+    where proprietor_id = #{proprietorId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.mcep.ted.dao.model.TedDemo">
+    update ted_demo
+    set proprietor_code = #{proprietorCode,jdbcType=VARCHAR},
+      proprietor_name = #{proprietorName,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      contact_id = #{contactId,jdbcType=INTEGER},
+      credit_code = #{creditCode,jdbcType=VARCHAR},
+      proprietor_nature = #{proprietorNature,jdbcType=INTEGER},
+      representative = #{representative,jdbcType=VARCHAR},
+      registered_capital = #{registeredCapital,jdbcType=REAL}
+    where proprietor_id = #{proprietorId,jdbcType=INTEGER}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

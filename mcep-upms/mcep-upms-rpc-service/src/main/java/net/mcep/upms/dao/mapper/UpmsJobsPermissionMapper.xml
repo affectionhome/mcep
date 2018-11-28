@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.mcep.upms.dao.mapper.UpmsJobsPermissionMapper">
+  <resultMap id="BaseResultMap" type="net.mcep.upms.dao.model.UpmsJobsPermission">
+    <id column="jobs_permission_id" jdbcType="INTEGER" property="jobsPermissionId" />
+    <result column="jobs_id" jdbcType="INTEGER" property="jobsId" />
+    <result column="permission_id" jdbcType="INTEGER" property="permissionId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    jobs_permission_id, jobs_id, permission_id
+  </sql>
+  <select id="selectByExample" parameterType="net.mcep.upms.dao.model.UpmsJobsPermissionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from upms_jobs_permission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from upms_jobs_permission
+    where jobs_permission_id = #{jobsPermissionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from upms_jobs_permission
+    where jobs_permission_id = #{jobsPermissionId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="net.mcep.upms.dao.model.UpmsJobsPermissionExample">
+    delete from upms_jobs_permission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="net.mcep.upms.dao.model.UpmsJobsPermission">
+    insert into upms_jobs_permission (jobs_permission_id, jobs_id, permission_id
+      )
+    values (#{jobsPermissionId,jdbcType=INTEGER}, #{jobsId,jdbcType=INTEGER}, #{permissionId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="net.mcep.upms.dao.model.UpmsJobsPermission">
+    insert into upms_jobs_permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jobsPermissionId != null">
+        jobs_permission_id,
+      </if>
+      <if test="jobsId != null">
+        jobs_id,
+      </if>
+      <if test="permissionId != null">
+        permission_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jobsPermissionId != null">
+        #{jobsPermissionId,jdbcType=INTEGER},
+      </if>
+      <if test="jobsId != null">
+        #{jobsId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionId != null">
+        #{permissionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="net.mcep.upms.dao.model.UpmsJobsPermissionExample" resultType="java.lang.Long">
+    select count(*) from upms_jobs_permission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update upms_jobs_permission
+    <set>
+      <if test="record.jobsPermissionId != null">
+        jobs_permission_id = #{record.jobsPermissionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobsId != null">
+        jobs_id = #{record.jobsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.permissionId != null">
+        permission_id = #{record.permissionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update upms_jobs_permission
+    set jobs_permission_id = #{record.jobsPermissionId,jdbcType=INTEGER},
+      jobs_id = #{record.jobsId,jdbcType=INTEGER},
+      permission_id = #{record.permissionId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="net.mcep.upms.dao.model.UpmsJobsPermission">
+    update upms_jobs_permission
+    <set>
+      <if test="jobsId != null">
+        jobs_id = #{jobsId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionId != null">
+        permission_id = #{permissionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where jobs_permission_id = #{jobsPermissionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.mcep.upms.dao.model.UpmsJobsPermission">
+    update upms_jobs_permission
+    set jobs_id = #{jobsId,jdbcType=INTEGER},
+      permission_id = #{permissionId,jdbcType=INTEGER}
+    where jobs_permission_id = #{jobsPermissionId,jdbcType=INTEGER}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

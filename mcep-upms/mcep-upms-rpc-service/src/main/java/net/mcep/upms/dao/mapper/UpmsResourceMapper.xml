@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.mcep.upms.dao.mapper.UpmsResourceMapper">
+  <resultMap id="BaseResultMap" type="net.mcep.upms.dao.model.UpmsResource">
+    <id column="resource_id" jdbcType="INTEGER" property="resourceId" />
+    <result column="resource_name" jdbcType="VARCHAR" property="resourceName" />
+    <result column="business_object" jdbcType="VARCHAR" property="businessObject" />
+    <result column="business_id" jdbcType="INTEGER" property="businessId" />
+    <result column="ctime" jdbcType="BIGINT" property="ctime" />
+    <result column="orders" jdbcType="BIGINT" property="orders" />
+    <result column="cd_name" jdbcType="VARCHAR" property="cdName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    upms_resource.resource_id, upms_resource.resource_name, upms_resource.business_object, upms_resource.business_id, upms_resource.ctime, upms_resource.orders
+  </sql>
+  <select id="selectByExample" parameterType="net.mcep.upms.dao.model.UpmsResourceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,co.cd_name
+    FROM upms_resource
+    LEFT JOIN upms_code co
+    ON upms_resource.business_object = co.cd_no
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from upms_resource
+    where resource_id = #{resourceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from upms_resource
+    where resource_id = #{resourceId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="net.mcep.upms.dao.model.UpmsResourceExample">
+    delete from upms_resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="net.mcep.upms.dao.model.UpmsResource">
+    insert into upms_resource (resource_id, name, business_object,
+      business_id, ctime, orders
+      )
+    values (#{resourceId,jdbcType=INTEGER}, #{resourceName,jdbcType=VARCHAR}, #{businessObject,jdbcType=VARCHAR},
+      #{businessId,jdbcType=INTEGER}, #{ctime,jdbcType=BIGINT}, #{orders,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="net.mcep.upms.dao.model.UpmsResource">
+    insert into upms_resource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="resourceId != null">
+        resource_id,
+      </if>
+      <if test="resourceName != null">
+        resource_name,
+      </if>
+      <if test="businessObject != null">
+        business_object,
+      </if>
+      <if test="businessId != null">
+        business_id,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="orders != null">
+        orders,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="resourceId != null">
+        #{resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="resourceName != null">
+        #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessObject != null">
+        #{businessObject,jdbcType=VARCHAR},
+      </if>
+      <if test="businessId != null">
+        #{businessId,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="orders != null">
+        #{orders,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="net.mcep.upms.dao.model.UpmsResourceExample" resultType="java.lang.Long">
+    select count(*) from upms_resource
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update upms_resource
+    <set>
+      <if test="record.resourceId != null">
+        resource_id = #{record.resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourceName != null">
+        resource_name = #{record.resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessObject != null">
+        business_object = #{record.businessObject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessId != null">
+        business_id = #{record.businessId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=BIGINT},
+      </if>
+      <if test="record.orders != null">
+        orders = #{record.orders,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update upms_resource
+    set resource_id = #{record.resourceId,jdbcType=INTEGER},
+      resource_name = #{record.resourceName,jdbcType=VARCHAR},
+      business_object = #{record.businessObject,jdbcType=VARCHAR},
+      business_id = #{record.businessId,jdbcType=INTEGER},
+      ctime = #{record.ctime,jdbcType=BIGINT},
+      orders = #{record.orders,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="net.mcep.upms.dao.model.UpmsResource">
+    update upms_resource
+    <set>
+      <if test="resourceName != null">
+        resource_name = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessObject != null">
+        business_object = #{businessObject,jdbcType=VARCHAR},
+      </if>
+      <if test="businessId != null">
+        business_id = #{businessId,jdbcType=INTEGER},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="orders != null">
+        orders = #{orders,jdbcType=BIGINT},
+      </if>
+    </set>
+    where resource_id = #{resourceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.mcep.upms.dao.model.UpmsResource">
+    update upms_resource
+    set resource_name = #{resourceName,jdbcType=VARCHAR},
+      business_object = #{businessObject,jdbcType=VARCHAR},
+      business_id = #{businessId,jdbcType=INTEGER},
+      ctime = #{ctime,jdbcType=BIGINT},
+      orders = #{orders,jdbcType=BIGINT}
+    where resource_id = #{resourceId,jdbcType=INTEGER}
+  </update>
+
+  <select id="getResourceByUserId" parameterType="map" resultMap="BaseResultMap">
+    SELECT t.* FROM upms_resource t
+    LEFT JOIN upms_resource_user t1
+      ON t1.resource_id = t.resource_id
+      WHERE t1.user_id = #{userid,jdbcType=INTEGER}
+      AND t.business_object = #{type,jdbcType=VARCHAR}
+    UNION
+    SELECT t.* FROM upms_resource t
+    LEFT JOIN upms_resource_role t1
+      ON t1.resource_id = t.resource_id
+    LEFT JOIN upms_user_role t2
+      ON t2.role_id = t1.role_id
+      WHERE t2.user_id=#{userid,jdbcType=INTEGER}  AND t.business_object = #{type,jdbcType=VARCHAR}
+    UNION
+    SELECT t.* FROM upms_resource t
+    LEFT JOIN upms_resource_jobs t1
+      ON t1.resource_id = t.resource_id
+    LEFT JOIN upms_user_jobs t2
+      ON t2.jobs_id = t1.jobs_id
+      WHERE t2.user_id=#{userid,jdbcType=INTEGER} AND t.business_object = #{type,jdbcType=VARCHAR}
+  </select>
+
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

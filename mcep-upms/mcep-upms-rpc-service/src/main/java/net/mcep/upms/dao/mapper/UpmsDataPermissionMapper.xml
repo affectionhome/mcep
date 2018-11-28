@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.mcep.upms.dao.mapper.UpmsDataPermissionMapper">
+  <resultMap id="BaseResultMap" type="net.mcep.upms.dao.model.UpmsDataPermission">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="permission_id" jdbcType="INTEGER" property="permissionId" />
+    <result column="resource_id" jdbcType="INTEGER" property="resourceId" />
+    <result column="authorization_type" jdbcType="VARCHAR" property="authorizationType" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="resource_name" jdbcType="VARCHAR" property="resourceName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, permission_id, resource_id, authorization_type
+  </sql>
+  <select id="selectByExample" parameterType="net.mcep.upms.dao.model.UpmsDataPermissionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,r.resource_name
+    ,p.name
+    from upms_data_permission
+    left join  (select resource_id r_id, resource_name from upms_resource) r on r.r_id = upms_data_permission.resource_id
+    left join  (select permission_id p_id, name from upms_permission) p on p.p_id = upms_data_permission.permission_id
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from upms_data_permission
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from upms_data_permission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="net.mcep.upms.dao.model.UpmsDataPermissionExample">
+    delete from upms_data_permission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="net.mcep.upms.dao.model.UpmsDataPermission">
+    insert into upms_data_permission (id, permission_id, resource_id, 
+      authorization_type)
+    values (#{id,jdbcType=INTEGER}, #{permissionId,jdbcType=INTEGER}, #{resourceId,jdbcType=INTEGER}, 
+      #{authorizationType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="net.mcep.upms.dao.model.UpmsDataPermission">
+    insert into upms_data_permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="permissionId != null">
+        permission_id,
+      </if>
+      <if test="resourceId != null">
+        resource_id,
+      </if>
+      <if test="authorizationType != null">
+        authorization_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="permissionId != null">
+        #{permissionId,jdbcType=INTEGER},
+      </if>
+      <if test="resourceId != null">
+        #{resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="authorizationType != null">
+        #{authorizationType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="net.mcep.upms.dao.model.UpmsDataPermissionExample" resultType="java.lang.Long">
+    select count(*) from upms_data_permission
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update upms_data_permission
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.permissionId != null">
+        permission_id = #{record.permissionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourceId != null">
+        resource_id = #{record.resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.authorizationType != null">
+        authorization_type = #{record.authorizationType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update upms_data_permission
+    set id = #{record.id,jdbcType=INTEGER},
+      permission_id = #{record.permissionId,jdbcType=INTEGER},
+      resource_id = #{record.resourceId,jdbcType=INTEGER},
+      authorization_type = #{record.authorizationType,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="net.mcep.upms.dao.model.UpmsDataPermission">
+    update upms_data_permission
+    <set>
+      <if test="permissionId != null">
+        permission_id = #{permissionId,jdbcType=INTEGER},
+      </if>
+      <if test="resourceId != null">
+        resource_id = #{resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="authorizationType != null">
+        authorization_type = #{authorizationType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.mcep.upms.dao.model.UpmsDataPermission">
+    update upms_data_permission
+    set permission_id = #{permissionId,jdbcType=INTEGER},
+      resource_id = #{resourceId,jdbcType=INTEGER},
+      authorization_type = #{authorizationType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

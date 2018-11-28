@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>业主</title>
+    <link href="/resources/mcep-admin/plugins/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/resources/mcep-admin/plugins/material-design-iconic-font-2.2.0/css/material-design-iconic-font.min.css" rel="stylesheet"/>
+    <link href="/resources/mcep-admin/plugins/bootstrap-table-1.11.0/bootstrap-table.min.css" rel="stylesheet"/>
+    <link href="/resources/mcep-admin/plugins/waves-0.7.5/waves.min.css" rel="stylesheet"/>
+    <link href="/resources/mcep-admin/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet"/>
+    <link href="/resources/mcep-admin/plugins/jquery-confirm/jquery-confirm.min.css" rel="stylesheet"/>
+    <link href="/resources/mcep-admin/plugins/select2/css/select2.min.css" rel="stylesheet"/>
+    <link href="/resources/mcep-admin/plugins/select2/theme/select2-bootstrap.min.css" rel="stylesheet"/>
+    <link href="/resources/common/css/common.css" rel="stylesheet"/>
+    <link href="/resources/mcep-admin/bootstrapvalidator-0.4.5/bootstrapValidator.css" rel="stylesheet"/>
+    <link href="/resources/mcep-admin/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="createDialog" class="crudDialog">
+
+    <div id="content">
+
+        <table id="main">
+            <thead>
+            <tr>
+                <th style="width: 13%;"></th>
+                <th style="width: 18%;"></th>
+                <th style="width: 13%;"></th>
+                <th style="width: 18%;"></th>
+                <th style="width: 13%;"></th>
+                <th style="width: 18%;"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <div class="title"><label>业主信息</label></div>
+
+            <tr>
+
+                <td><label>业主编码</label><span class="important" >*</span></td>
+                <td>
+                    <!--th:value="${mmsProprietorMax.proprietorId}"-->
+                    <input style="display: none;" id="maxId" type="text" class="form-control" name="" maxlength="100"  >
+                    <input disabled id="proprietorCode" type="text" class="form-control" name="proprietorCode" maxlength="100" >
+                </td>
+                <td><label>业主名称</label><span class="important" >*</span></td>
+                <td>
+                    <div class="form-group">
+                    <input id="proprietorName" type="text" class="form-control" name="proprietorName" maxlength="100"
+                           required
+                           data-bv-notempty-message="业主名称不能为空"
+                    />
+                    </div>
+                </td>
+
+
+            </tr>
+
+            <tr>
+                <td><label>社会信用代码</label><span class="important" >*</span></td>
+                <td class="form-group">
+                    <!--th:value="${mmsProprietorMax.proprietorId}"-->
+                    <input id="creditCode" type="text" class="form-control" name="creditCode" maxlength="100"  >
+                </td>
+                <td><label>公司性质</label><span class="important" >*</span></td>
+                <td>
+                    <div class="form-group">
+                        <select class="selectpicker" id="proprietorNature" name="proprietorNature" style="width: 100%">
+                            <option  value="0">国有独资</option>
+                            <option  value="1">国有控股</option>
+                            <option  value="2">中外合资</option>
+                            <option  value="3">中外合作</option>
+                            <option  value="4">外商独资</option>
+                            <option  value="5">民营</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label>法定代表人</label><span class="important" >*</span></td>
+                <td class="form-group">
+                    <!--th:value="${mmsProprietorMax.proprietorId}"-->
+                    <input id="representative" type="text" class="form-control" name="representative" maxlength="100"  >
+                </td>
+                <td><label>注册资本(万元)</label><span class="important" >*</span></td>
+                <td>
+                    <div class="form-group">
+                        <input id="registeredCapital" type="text" class="form-control" name="registeredCapital" maxlength="100"
+                               required
+                               data-bv-notempty-message="注册资本不能为空"
+                                />
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label>业主联络人</label></td>
+                <td >
+                    <div class="input-group">
+                        <div class="form-group">
+                            <input id="contactName" type="text" readonly="true" class="form-control" name="contactName" maxlength="64" >
+                            <input id="contactId" type="text" style="display:none;" class="form-control" name="contactId" maxlength="10" >
+                        </div>
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" style="float:right" onclick="selectYanUser()">选择</button>
+                    </span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr >
+                <td><label>备注</label></td>
+                <td colspan="3">
+                    <textarea id="memo" name="memo" style="width:100%;"rows="5"></textarea>
+                </td>
+            </tr>
+
+
+            </tbody>
+
+        </table>
+
+
+
+        <div style="height:60px;">
+            <div class="form-group text-left dialog-buttons toolbar">
+                <button id="buttenc" type="butten" class="btn btn-default" onclick="commit();">&nbsp;&nbsp;保存&nbsp;&nbsp;</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script src="/resources/mcep-admin/plugins/jquery.1.12.4.min.js"></script>
+<script src="/resources/mcep-admin/plugins/bootstrap-3.3.0/js/bootstrap.min.js"></script>
+<script src="/resources/mcep-admin/plugins/bootstrap-table-1.11.0/bootstrap-table.min.js"></script>
+<script src="/resources/mcep-admin/plugins/bootstrap-table-1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="/resources/mcep-admin/plugins/waves-0.7.5/waves.min.js"></script>
+<script src="/resources/mcep-admin/plugins/jquery-confirm/jquery-confirm.min.js"></script>
+<script src="/resources/mcep-admin/plugins/select2/js/select2.min.js"></script>
+<script src="/resources/mcep-admin/plugins/webuploader-0.1.5/webuploader.min.js"></script>
+<script src="/resources/mcep-admin/plugins/zTree_v3/js/jquery.ztree.all.min.js"></script>
+<script src="/resources/mcep-admin/js/common.js"></script>
+<script src="/resources/mcep-admin/bootstrapvalidator-0.4.5/bootstrapValidator.js"></script>
+<script src="/resources/common/js/Mcep.js"></script>
+<script src="/resources/common/plugins/datetimepicker/bootstrap-datetimepicker.js"></script>
+<script src="/resources/common/js/demo/create.js"></script>
+
+<script th:inline="javascript">
+
+        var maxNo = [[${maxNo}]];
+
+</script>
+
+</body>
+</html>

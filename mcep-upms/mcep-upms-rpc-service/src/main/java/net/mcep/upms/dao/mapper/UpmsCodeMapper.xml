@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.mcep.upms.dao.mapper.UpmsCodeMapper">
+  <resultMap id="BaseResultMap" type="net.mcep.upms.dao.model.UpmsCode">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="cat_no" jdbcType="VARCHAR" property="catNo" />
+    <result column="cd_no" jdbcType="VARCHAR" property="cdNo" />
+    <result column="cd_name" jdbcType="VARCHAR" property="cdName" />
+    <result column="ison" jdbcType="VARCHAR" property="ison" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="resource_id" jdbcType="INTEGER" property="resourceId" />
+    <result column="resource_name" jdbcType="VARCHAR" property="resourceName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    upms_code.id, upms_code.cat_no, upms_code.cd_no, upms_code.cd_name, upms_code.ison, upms_code.parent_id, upms_code.sort
+  </sql>
+  <select id="selectByExample" parameterType="net.mcep.upms.dao.model.UpmsCodeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from upms_code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
+
+  <select id="selectByExample1" parameterType="net.mcep.upms.dao.model.UpmsCodeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,t2.resource_id
+    ,t2.resource_name
+    from upms_code
+    left join upms_resource t2
+    on upms_code.cd_no = t2.business_object
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from upms_code
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from upms_code
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="net.mcep.upms.dao.model.UpmsCodeExample">
+    delete from upms_code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="net.mcep.upms.dao.model.UpmsCode">
+    insert into upms_code (id, cat_no, cd_no, 
+      cd_name, ison, parent_id, 
+      sort)
+    values (#{id,jdbcType=BIGINT}, #{catNo,jdbcType=VARCHAR}, #{cdNo,jdbcType=VARCHAR}, 
+      #{cdName,jdbcType=VARCHAR}, #{ison,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, 
+      #{sort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="net.mcep.upms.dao.model.UpmsCode">
+    insert into upms_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="catNo != null">
+        cat_no,
+      </if>
+      <if test="cdNo != null">
+        cd_no,
+      </if>
+      <if test="cdName != null">
+        cd_name,
+      </if>
+      <if test="ison != null">
+        ison,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="catNo != null">
+        #{catNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cdNo != null">
+        #{cdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cdName != null">
+        #{cdName,jdbcType=VARCHAR},
+      </if>
+      <if test="ison != null">
+        #{ison,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="net.mcep.upms.dao.model.UpmsCodeExample" resultType="java.lang.Long">
+    select count(*) from upms_code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update upms_code
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.catNo != null">
+        cat_no = #{record.catNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cdNo != null">
+        cd_no = #{record.cdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cdName != null">
+        cd_name = #{record.cdName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ison != null">
+        ison = #{record.ison,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null">
+        parent_id = #{record.parentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update upms_code
+    set id = #{record.id,jdbcType=BIGINT},
+      cat_no = #{record.catNo,jdbcType=VARCHAR},
+      cd_no = #{record.cdNo,jdbcType=VARCHAR},
+      cd_name = #{record.cdName,jdbcType=VARCHAR},
+      ison = #{record.ison,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=BIGINT},
+      sort = #{record.sort,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="net.mcep.upms.dao.model.UpmsCode">
+    update upms_code
+    <set>
+      <if test="catNo != null">
+        cat_no = #{catNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cdNo != null">
+        cd_no = #{cdNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cdName != null">
+        cd_name = #{cdName,jdbcType=VARCHAR},
+      </if>
+      <if test="ison != null">
+        ison = #{ison,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.mcep.upms.dao.model.UpmsCode">
+    update upms_code
+    set cat_no = #{catNo,jdbcType=VARCHAR},
+      cd_no = #{cdNo,jdbcType=VARCHAR},
+      cd_name = #{cdName,jdbcType=VARCHAR},
+      ison = #{ison,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      sort = #{sort,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>
